@@ -1,6 +1,6 @@
 # Roblox Modules
-This github will have random modules that do different things. 
-Everything on here is made by me.
+This github hosts the various modules I make, each with a different purpose.
+Generally should be drop in to any game, with some reading of the methods.
 
-# Descriptions
-PartnerService: Does matchmaking for story intersections. Very basic MemoryStores.
+## PartnerService
+Global matchmaking for "story intersections", using a combination of MemoryStores and Messaging.
