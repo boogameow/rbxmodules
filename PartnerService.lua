@@ -6,10 +6,7 @@ local PartnerService = setmetatable({}, {})
 PartnerService.__index = PartnerService
 PartnerService.ClassName = "PartnerService"
 
-PartnerService.Searching = false
-PartnerService.Frozen = false
 PartnerService.SubscriptionName = "PartnerSearch"
-
 PartnerService.Timeout = 600
 
 local MemoryStore = MemoryService:GetSortedMap(PartnerService.SubscriptionName)
@@ -19,6 +16,9 @@ function PartnerService.new(Goal, Place)
 
 	self.Goal = Goal
 	self.Place = Place or game.PlaceId
+
+	self.Searching = false
+	self.Frozen = false
 
 	local Reserve, PrivateId = TeleportService:ReserveServer(self.Place)
 
