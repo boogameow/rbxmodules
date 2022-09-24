@@ -2,7 +2,7 @@ local MemoryService = game:GetService("MemoryStoreService")
 local TeleportService = game:GetService("TeleportService")
 local Messaging = game:GetService("MessagingService")
 
-local PartnerService = setmetatable({}, {})
+local PartnerService = {}
 PartnerService.__index = PartnerService
 PartnerService.ClassName = "PartnerService"
 
