@@ -1,6 +1,6 @@
 [package]
 name = "boogameow/partner"
-description = 'Basic global matchmaking used for "story intersections"'
+description = "Basic global matchmaking for story intersections"
 version = "0.1.0"
 license = "MIT"
 authors = ["boogameow"]
