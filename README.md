@@ -1,4 +1,4 @@
-[![CI](https://github.com/boogameow/rbxmodules/actions/workflows/ci.yaml/badge.svg)](https://github.com/boogameow/rbxmodules/actions/workflows/ci.yaml)
+[![CI](https://github.com/boogameow/rbxmodules/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/boogameow/rbxmodules/actions/workflows/ci.yaml)
 
 # RbxModules
 
