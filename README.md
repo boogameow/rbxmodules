@@ -1,9 +1,8 @@
-# Roblox Modules
-This github hosts the various modules I make, each with a different purpose.
-Generally should be drop in to any game, with some reading of the methods.
+[![CI](https://github.com/boogameow/rbxmodules/actions/workflows/ci.yaml/badge.svg)](https://github.com/boogameow/rbxmodules/actions/workflows/ci.yaml)
 
-## PartnerService
-Global matchmaking for "story intersections", using a combination of MemoryStores and Messaging.
+# RbxModules
 
-## Preload
-Module used to preload sounds and images. PreloadAsync did not work for me, so I custom made one.
+| Module | Dependency | Description |
+| -- | -- | -- |
+| PartnerService | `Partner = "boogameow/partner@0.1.0"` | Basic global matchmaking used for "story intersections" |
+| Preload | `Preload = "boogameow/preload@0.1.0"` | Custom preload module |

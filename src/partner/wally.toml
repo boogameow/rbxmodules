@@ -1,0 +1,10 @@
+[package]
+name = "boogameow/partner"
+description = 'Basic global matchmaking used for "story intersections"'
+version = "0.1.0"
+license = "MIT"
+authors = ["boogameow"]
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]

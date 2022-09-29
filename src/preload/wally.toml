@@ -1,0 +1,11 @@
+[package]
+name = "boogameow/preload"
+description = 'Custom preload module'
+version = "0.1.0"
+license = "MIT"
+authors = ["boogameow"]
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+maid = "alexinite/maid@2.3.2"

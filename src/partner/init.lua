@@ -2,17 +2,17 @@ local MemoryService = game:GetService("MemoryStoreService")
 local TeleportService = game:GetService("TeleportService")
 local Messaging = game:GetService("MessagingService")
 
-local PartnerService = {}
-PartnerService.__index = PartnerService
-PartnerService.ClassName = "PartnerService"
+local Partner = {}
+Partner.__index = Partner
+Partner.ClassName = "Partner"
 
-PartnerService.SubscriptionName = "PartnerSearch"
-PartnerService.Timeout = 600
+Partner.SubscriptionName = "PartnerSearch"
+Partner.Timeout = 600
 
-local MemoryStore = MemoryService:GetSortedMap(PartnerService.SubscriptionName)
+local MemoryStore = MemoryService:GetSortedMap(Partner.SubscriptionName)
 
-function PartnerService.new(Goal, Place)
-	local self = setmetatable({}, PartnerService)
+function Partner.new(Goal, Place)
+	local self = setmetatable({}, Partner)
 
 	self.Goal = Goal
 	self.Place = Place or game.PlaceId
@@ -37,7 +37,7 @@ function PartnerService.new(Goal, Place)
 	return self
 end
 
-function PartnerService:Cancel()
+function Partner:Cancel()
 	if self.Frozen == true then
 		self.Freeze:Wait()
 	end
@@ -91,7 +91,7 @@ function PartnerService:Cancel()
 	self.Result:Fire(false)
 end
 
-function PartnerService:Found()
+function Partner:Found()
 	if self.Searching == false then
 		return
 	end
@@ -106,7 +106,7 @@ function PartnerService:Found()
 	self.Result:Fire(true)
 end
 
-function PartnerService:Search()
+function Partner:Search()
 	if self.Frozen == true then
 		self.Freeze:Wait()
 	end
@@ -142,12 +142,12 @@ function PartnerService:Search()
 	local Found = false
 
 	local function Try()
-		local Worked, Err = pcall(function()
+		local Worked2, Err = pcall(function()
 			MemoryStore:UpdateAsync(self.Goal, function(Data)
 				if not Data or Data.Found == true then
 					return {
 						Found = false,
-						ReserveCode = self.MyReserveCode
+						ReserveCode = self.MyReserveCode,
 					}
 				elseif Data.Found == false then
 					self.ReserveCode = Data.ReserveCode
@@ -161,26 +161,26 @@ function PartnerService:Search()
 			end, self.Timeout)
 		end)
 
-		return Worked, Err
+		return Worked2, Err
 	end
 
-	local Worked, Err = Try()
+	local Worked2, Err = Try()
 
-	if not Worked then
+	if not Worked2 then
 		local Tries = 0
 
 		while Tries < 3 do
 			task.wait(3)
 
 			Tries += 1
-			Worked, Err = Try()
+			Worked2, Err = Try()
 
-			if Worked then
+			if Worked2 then
 				break
 			end
 		end
 
-		if not Worked then
+		if not Worked2 then
 			if self.Connection then
 				self.Connection:Disconnect()
 				self.Connection = nil
@@ -195,9 +195,9 @@ function PartnerService:Search()
 
 	if Found == true then
 		task.spawn(function()
-			local Sub, Data = self.SubscriptionName, {["ReserveCode"] = self.ReserveCode}
+			local Sub, Data = self.SubscriptionName, { ["ReserveCode"] = self.ReserveCode }
 
-			local function Try()
+			local function Try2()
 				local Success = pcall(function()
 					Messaging:PublishAsync(Sub, Data)
 				end)
@@ -206,12 +206,12 @@ function PartnerService:Search()
 			end
 
 			while true do
-				local Success = Try()
+				local Success = Try2()
 
 				if Success then
 					break
 				end
-				
+
 				task.wait(3)
 			end
 		end)
@@ -228,7 +228,7 @@ function PartnerService:Search()
 	end
 end
 
-function PartnerService:Destroy()
+function Partner:Destroy()
 	self:Cancel()
 
 	self.Result:Destroy()
@@ -237,4 +237,4 @@ function PartnerService:Destroy()
 	setmetatable(self, nil)
 end
 
-return PartnerService
+return Partner
